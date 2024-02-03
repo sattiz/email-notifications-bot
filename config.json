@@ -1,0 +1,14 @@
+{
+    "chat_id": "123456789", 
+    "bot_token": "1234567890:qwertyui123456789asdfghjk", 
+    "user": {
+        "email": "example@yandex.com",
+        "password": "password",
+        "imap": "imap.yandex.ru",
+        "dockerfile-name": "Dockerfile_example@yandex.com",
+        "container-name": "example@yandex.com",
+        "restart": "True",
+        "log-file-path": "D:\\projects\\containers\\logs",
+        "log-file-name": "example@yandex.com.log"
+    }
+}
