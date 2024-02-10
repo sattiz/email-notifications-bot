@@ -11,6 +11,7 @@ from app.helpers.email_routines import check_emails_job
 
 
 async def main():
+    print('Bot started.')
     bot = Bot(token)
     dp = Dispatcher()
     scheduler = AsyncIOScheduler()
@@ -26,4 +27,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-    print('Bot started.')
+    

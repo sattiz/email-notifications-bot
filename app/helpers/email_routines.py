@@ -1,3 +1,4 @@
+import email.header
 import imaplib
 import smtplib as smtp
 import ssl
@@ -31,12 +32,22 @@ def check_emails() -> list[str]:
                         if part.get_content_type() == "text/plain":
                             text += part.get_payload()
                 else:
-                    text += email_message.get_payload()[0].get_payload(decode=False)
+                    text += email_message.get_payload(decode=False)
+                    text = text.replace('<div>', '').replace('</div>', '\n')
+
+                    subject_info = email.header.decode_header(email_message['Subject'])
+                    print(subject_info)
+                    subjects_list = [
+                        header_tuple[0].decode(encoding=header_tuple[1])
+                        if header_tuple[1] is not None
+                        else header_tuple[0]
+                        for header_tuple in subject_info]
+                    print(subjects_list)
 
                 notification_text = (f"From: {email_message['From']}\n" +
-                                     f"Subject: {email_message['Subject']}\n" +
+                                     f"Subject: {''.join(subjects_list)}\n" +
                                      f"Date: {email_message['Date']}\n" +
-                                     f"Text:{text}\n")
+                                     f"Text: \n{text}\n")
                 emails.append(notification_text)
 
         imap_client.logout()
