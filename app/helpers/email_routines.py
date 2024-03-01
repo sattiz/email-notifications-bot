@@ -41,13 +41,16 @@ def check_emails() -> list[str]:
                         header_tuple[0].decode(encoding=header_tuple[1])
                         if header_tuple[1] is not None
                         else header_tuple[0]
-                        for header_tuple in subject_info]
+                        for header_tuple in subject_info
+                    ]
                     print(subjects_list)
 
-                notification_text = (f"From: {email_message['From']}\n" +
-                                     f"Subject: {''.join(subjects_list)}\n" +
-                                     f"Date: {email_message['Date']}\n" +
-                                     f"Text: \n{text}\n")
+                notification_text = (
+                        f"From: {email_message['From']}\n" +
+                        f"Subject: {''.join(subjects_list)}\n" +
+                        f"Date: {email_message['Date']}\n" +
+                        text
+                )
                 emails.append(notification_text)
 
         imap_client.logout()
